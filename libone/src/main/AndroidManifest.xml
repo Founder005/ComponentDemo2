@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zyh.libone" >
+
+    <application>
+        <activity android:name=".LibOneActivity" />
+        <activity android:name=".LibOne2Activity"/>
+    </application>
+</manifest>

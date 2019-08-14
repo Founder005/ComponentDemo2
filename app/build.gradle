@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.zyh.componentdemo"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+
+    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.activityrouter_annotationProcessor"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife_annotationProcessor"
+
+    if (isModule.toBoolean()){//非集成模式只需依赖common包
+        implementation project(':libcommon')
+    }else{
+        implementation project(':libone')
+        implementation project(':libtwo')
+    }
+
+}
